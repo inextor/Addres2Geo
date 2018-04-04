@@ -1,0 +1,3 @@
+[submodule "akou"]
+	path = akou
+	url = git@github.com:inextor/akou.git
