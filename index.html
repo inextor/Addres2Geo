@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Address to geocoordintes</title>
+		<script>
+		window.addEventListener('load',(evt)=>
+		{
+			document.getElementById('submit').addEventListener('click',(evt)=>
+			{
+				let inputText = document.getElementById('input');
+				fetch
+				(
+					'getGeo.php'
+					,{
+						method		: 'POST'
+						,headers	: {'Content-Type':'application/x-www-form-urlencoded'}
+						,body		: 'addresses='+encodeURIComponent( inputText.value )
+					}
+				)
+				.then(response => response.text() )
+				.then((responseData)=>
+				{ 
+						document.getElementById('output').value = responseData
+				})
+				.catch((e)=>
+				{
+					document.getElementById('output').value = e.getMessage();
+				});
+			})
+		});
+		</script>
+	</head>
+	<form>
+		<textarea id="input" style="display: block; width:550px; height:280px;overflow: scroll;"></textarea>
+		<input id="submit" type="button" value="Get Geo">
+		<textarea id="output" style="display:block; width:550px; height:280px;overflow: scroll;"></textarea>
+	</form>
+</html>
